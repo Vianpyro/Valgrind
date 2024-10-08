@@ -1,22 +1,29 @@
 ---
-name: Valgrind
+name: Valgrind Test
 
 on:
-  push: null
-
-permissions:
-  contents: read
-  statuses: write
+  workflow_run:
+    workflows: ["Compile C Project"]
+    types:
+      - completed
 
 jobs:
-  build:
-    name: Valgrind
+  valgrind:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install
-      run: >
-        sudo apt search valgrind &&
-        sudo apt install valgrind
-    - name: Run
-      run: valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${{ github.repository }}
+    # Download the compiled binary artifact
+    - name: Download compiled binary
+      uses: actions/download-artifact@v4
+      with:
+        name: compiled-binary
+        path: ./ # Download to current directory
+
+    # Install Valgrind
+    - name: Install Valgrind
+      run: sudo apt-get install -y valgrind
+
+    # Run Valgrind to check memory issues
+    - name: Run Valgrind
+      run: |
+        valgrind --leak-check=full ./a.out
