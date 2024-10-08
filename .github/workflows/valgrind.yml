@@ -10,17 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code from the repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # Download the compiled binary artifact
+      - name: Download compiled binary
+        uses: actions/download-artifact@v4
+        with:
+          name: compiled-binary
+          path: ./  # Download to the current directory
 
-      # Compile the project (this could be customized)
-      - name: Compile project
-        run: gcc *.c
+      # Make the binary executable
+      - name: Make the binary executable
+        run: chmod +x ./a.out
 
       # Install Valgrind
       - name: Install Valgrind
-        run: sudo apt-get update && sudo apt-get install -y valgrind
+        run: sudo apt update && sudo apt install -y valgrind
 
       # Run Valgrind to check for memory leaks
       - name: Run Valgrind
