@@ -1,0 +1,15 @@
+---
+name: Compile and Test with Valgrind
+
+on:
+  push: null
+
+jobs:
+  compile:
+    name: Compile C Project
+    uses: Vianpyro/Valgrind/.github/workflows/compile.yml@main  # Reference the compile workflow
+
+  test-valgrind:
+    name: Test Memory Leaks with Valgrind
+    needs: compile
+    uses: Vianpyro/Valgrind/.github/workflows/valgrind.yml@main  # Reference the Valgrind workflow
