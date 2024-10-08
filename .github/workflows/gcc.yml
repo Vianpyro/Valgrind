@@ -1,0 +1,15 @@
+---
+name: Compile with GCC
+
+on:
+  push: null
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install GCC
+        run: >
+          sudo apt install gcc
+          gcc --version
