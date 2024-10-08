@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Install GCC
         run: >
-          sudo apt install gcc
+          sudo apt install gcc &&
           gcc --version
