@@ -1,5 +1,5 @@
 ---
-name: Compile with GCC
+name: Compile C Project
 
 on:
   push: null
@@ -9,11 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install GCC
-        run: >
-          sudo apt install gcc &&
-          gcc --version
-      - name: Compile repository
-        run: >
-          cd ${{ github.workspace }} &&
-          gcc *.c
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Install dependencies (if needed)
+    - name: Install dependencies
+      run: sudo apt update && sudo apt install -y build-essential
+
+    - name: Compile C project
+      run: |
+        gcc *.c
+        ls -lah
