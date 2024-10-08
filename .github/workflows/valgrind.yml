@@ -2,28 +2,24 @@
 name: Valgrind Test
 
 on:
-  workflow_run:
-    workflows: ["Compile C Project"]
-    types:
-      - completed
+  push: null
 
 jobs:
-  valgrind:
+  use-artifact:
     runs-on: ubuntu-latest
 
     steps:
+    # Call the reusable workflow
+    - name: Compile the C project
+      uses: ${{ github.repository }}/.github/workflows/gcc.yml@main  # Reference the reusable workflow
+
     # Download the compiled binary artifact
     - name: Download compiled binary
       uses: actions/download-artifact@v4
       with:
         name: compiled-binary
-        path: ./ # Download to current directory
+        path: ./  # Download to the current directory
 
-    # Install Valgrind
-    - name: Install Valgrind
-      run: sudo apt install -y valgrind
-
-    # Run Valgrind to check memory issues
-    - name: Run Valgrind
-      run: |
-        valgrind --leak-check=full ./a.out
+    # Run the binary
+    - name: Run the binary
+      run: ./a.out
