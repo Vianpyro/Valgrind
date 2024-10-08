@@ -11,7 +11,7 @@ jobs:
     steps:
     # Call the reusable workflow
     - name: Compile the C project
-      uses: ${{ github.repository }}/.github/workflows/gcc.yml@main  # Reference the reusable workflow
+      uses: Vianpyro/Valgrind/.github/workflows/gcc.yml@main  # Reference the reusable workflow
 
     # Download the compiled binary artifact
     - name: Download compiled binary
