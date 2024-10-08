@@ -2,7 +2,7 @@
 name: Compile C Project
 
 on:
-  push: null
+  workflow_call: {}  # Allows this workflow to be called by other workflows
 
 jobs:
   build:
@@ -23,9 +23,10 @@ jobs:
         gcc *.c  # Compiles all .c files, output will be a.out by default
         ls -lah  # List the compiled files to verify
 
-    # Save compiled binary for future steps
+    # Save compiled binary as artifact
     - name: Save binary as artifact
       uses: actions/upload-artifact@v4
       with:
         name: compiled-binary
         path: ./a.out  # a.out is the default binary name after compilation
+        retention-days: 3
