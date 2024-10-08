@@ -6,20 +6,21 @@ on:
 
 jobs:
   use-artifact:
+    uses: Vianpyro/Valgrind/.github/workflows/gcc.yml@main  # Move the reusable workflow reference to the jobs level
+
+  run-binary:
     runs-on: ubuntu-latest
 
+    needs: use-artifact  # This job depends on the previous one
+
     steps:
-    # Call the reusable workflow
-    - name: Compile the C project
-      uses: Vianpyro/Valgrind/.github/workflows/gcc.yml@main  # Reference the reusable workflow
+      # Download the compiled binary artifact
+      - name: Download compiled binary
+        uses: actions/download-artifact@v4
+        with:
+          name: compiled-binary
+          path: ./  # Download to the current directory
 
-    # Download the compiled binary artifact
-    - name: Download compiled binary
-      uses: actions/download-artifact@v4
-      with:
-        name: compiled-binary
-        path: ./  # Download to the current directory
-
-    # Run the binary
-    - name: Run the binary
-      run: ./a.out
+      # Run the binary
+      - name: Run the binary
+        run: ./a.out
