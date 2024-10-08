@@ -14,7 +14,7 @@ jobs:
     steps:
     # Download the compiled binary artifact
     - name: Download compiled binary
-      uses: actions/download-artifact@v4.1.8
+      uses: actions/download-artifact@v4
       with:
         name: compiled-binary
         path: ./ # Download to current directory
