@@ -24,6 +24,10 @@ jobs:
       - name: Make the binary executable
         run: chmod +x ./a.out
 
-      # Run the binary
-      - name: Run the binary
-        run: ./a.out
+      # Install Valgrind
+      - name: Install Valgrind
+        run: sudo apt-get update && sudo apt-get install -y valgrind
+
+      # Run the binary with Valgrind
+      - name: Run Valgrind
+        run: valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./a.out
