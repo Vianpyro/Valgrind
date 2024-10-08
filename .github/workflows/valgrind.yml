@@ -1,0 +1,22 @@
+---
+name: Valgrind
+
+on:
+  push: null
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  build:
+    name: Valgrind
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install
+      run: >
+        sudo apt search valgrind &&
+        sudo apt install valgrind
+    - name: Run
+      run: valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ${{ github.repository }}
