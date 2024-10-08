@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Checkout the code
     - name: Checkout code
       uses: actions/checkout@v4
 
@@ -16,7 +17,15 @@ jobs:
     - name: Install dependencies
       run: sudo apt update && sudo apt install -y build-essential
 
+    # Compile the C project
     - name: Compile C project
       run: |
-        gcc *.c
-        ls -lah
+        gcc *.c  # Compiles all .c files, output will be a.out by default
+        ls -lah  # List the compiled files to verify
+
+    # Save compiled binary for future steps
+    - name: Save binary as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: compiled-binary
+        path: ./a.out  # a.out is the default binary name after compilation
