@@ -13,3 +13,5 @@ jobs:
         run: >
           sudo apt install gcc &&
           gcc --version
+      - name: Compile repository
+        run: gcc ${{ github.workspace }}*.c
