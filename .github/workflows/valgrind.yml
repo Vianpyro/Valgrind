@@ -5,12 +5,14 @@ on:
   push: null
 
 jobs:
-  use-artifact:
+  create-artifact:
+    name: Create Artifact
     uses: Vianpyro/Valgrind/.github/workflows/gcc.yml@main
 
-  run-binary:
+  test-memory-leaks:
+    name: Test Memory Leaks with Valgrind
     runs-on: ubuntu-latest
-    needs: use-artifact
+    needs: create-artifact
 
     steps:
       # Download the compiled binary artifact
@@ -28,6 +30,11 @@ jobs:
       - name: Install Valgrind
         run: sudo apt-get update && sudo apt-get install -y valgrind
 
-      # Run the binary with Valgrind
+      # Run the binary with Valgrind and fail on memory leaks
       - name: Run Valgrind
-        run: valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./a.out
+        run: |
+          valgrind --leak-check=full \
+                   --track-origins=yes \
+                   --show-reachable=yes \
+                   --error-exitcode=1 \
+                   ./a.out
