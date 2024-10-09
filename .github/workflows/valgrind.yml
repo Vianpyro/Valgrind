@@ -8,7 +8,7 @@ on:
         type: string
         description: 'Name of the compiled binary artifact'
         required: false
-        default: './a.out'
+        default: 'a.out'
 
 jobs:
   run-valgrind:
@@ -25,7 +25,7 @@ jobs:
 
       # Make the binary executable
       - name: Make the binary executable
-        run: chmod +x ${{ inputs.name }}
+        run: chmod +x ./${{ inputs.name }}
 
       # Install Valgrind
       - name: Install Valgrind
@@ -38,4 +38,4 @@ jobs:
                    --track-origins=yes \
                    --show-reachable=yes \
                    --error-exitcode=1 \
-                   ${{ inputs.name }}
+                   ./${{ inputs.name }}
