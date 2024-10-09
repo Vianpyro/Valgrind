@@ -13,5 +13,3 @@ jobs:
     name: Test Memory Leaks with Valgrind
     needs: compile
     uses: Vianpyro/Valgrind/.github/workflows/valgrind.yml@main  # Reference the Valgrind workflow
-    with:
-      name: valgrind
