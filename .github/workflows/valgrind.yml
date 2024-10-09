@@ -5,6 +5,7 @@ on:
   workflow_call:  # Makes this workflow reusable by other repositories
     inputs:
       name:
+        type: string
         description: 'Name of the compiled binary artifact'
         required: true
         default: './a.out'
