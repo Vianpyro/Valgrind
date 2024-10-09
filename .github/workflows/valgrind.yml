@@ -4,14 +4,10 @@ name: Valgrind Workflow
 on:
   workflow_call:  # Makes this workflow reusable by other repositories
     inputs:
-      path:
-        description: 'Path to download the binary artifact'
-        required: true
-        default: './a.out'
       name:
         description: 'Name of the compiled binary artifact'
         required: true
-        default: 'compiled-binary'
+        default: './a.out'
 
 jobs:
   run-valgrind:
@@ -23,12 +19,12 @@ jobs:
       - name: Download compiled binary
         uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.name }}
-          path: ${{ inputs.path }}
+          name: compiled-binary
+          path: ./  # Download to the current directory
 
       # Make the binary executable
       - name: Make the binary executable
-        run: chmod +x ${{ inputs.path }}
+        run: chmod +x ${{ inputs.name }}
 
       # Install Valgrind
       - name: Install Valgrind
@@ -41,4 +37,4 @@ jobs:
                    --track-origins=yes \
                    --show-reachable=yes \
                    --error-exitcode=1 \
-                   ${{ inputs.path }}
+                   ${{ inputs.name }}
