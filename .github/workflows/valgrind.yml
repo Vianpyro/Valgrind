@@ -12,7 +12,7 @@ on:
 
 jobs:
   run-valgrind:
-    name: Run Valgrind on the C binary
+    name: Run Valgrind on the binary file
     runs-on: ubuntu-latest
 
     steps:
