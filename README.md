@@ -130,9 +130,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Dependencies
-      run: sudo apt install nlohmann-json3-dev
-
     - name: Build Project and Run Tests
       run: make distcheck
 
