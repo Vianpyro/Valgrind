@@ -2,7 +2,12 @@
 name: Compile and Test with Valgrind
 
 on:
-  push: null
+  push:
+    paths:
+      - '**/*.c'
+      - '**/*.cpp'
+      - '**/*.h'
+      - '**/*.hpp'
 
 jobs:
   compile:
