@@ -156,7 +156,7 @@ In this example:
 
 ## Customizing Valgrind Options
 
-The Valgrind Workflow includes customizable options to control the level of detail in memory checks:
+The Valgrind Workflow **will** includes customizable options to control the level of detail in memory checks:
 
 - **`--leak-check=full`**: Provides detailed leak information.
 - **`--track-origins=yes`**: Tracks the origin of uninitialized values.
@@ -167,13 +167,11 @@ The Valgrind Workflow includes customizable options to control the level of deta
 
 ## Example Output
 
-Upon successful execution, Valgrind will output memory leak details directly in the GitHub Actions log. If any leaks are detected, the `error-exitcode=1` option will cause the workflow to fail, making it easy to detect memory management issues in CI.
+Upon successful execution, Valgrind will output memory leak details directly in the GitHub Actions log. 
+If any leaks are detected, the `error-exitcode=1` option will cause the workflow to fail, making it easy to detect memory management issues in CI.
 
 ---
 
 ## License
 
 This repository is open source and available under the [MIT License](LICENSE).
-```
-
-This `README.md` provides clear usage instructions, setup details, and explanations for customization options, making it comprehensive and easy to follow.
