@@ -15,7 +15,7 @@ These workflows can be used as a reusable GitHub Action in any repository with a
 
 ### 1. Compile C Project Workflow
 
-This workflow compiles the C project, creating an executable that will later be tested with Valgrind.
+This workflow compiles the C project, creating an executable artifact that will later be tested with Valgrind.
 
 #### Workflow Configuration
 
@@ -51,7 +51,7 @@ jobs:
 
 ### 2. Valgrind Memory Leak Test Workflow
 
-This workflow retrieves the compiled binary and runs it through Valgrind to detect memory leaks and other memory issues.
+This workflow retrieves the compiled binary artifact and runs it through Valgrind to detect memory leaks and other memory issues.
 
 #### Workflow Configuration
 
@@ -98,9 +98,10 @@ jobs:
 
 ## Usage
 
-### Step 1: Add the Compile Workflow to Your Repository
+### Step 1: Add the Compile Workflow to Your Repository (if needed)
 
-To start using this workflow in your project, copy the `Compile C Project` workflow file into your repository under `.github/workflows/compile.yml`. This file will compile your C/C++ project and save the binary as an artifact for the Valgrind tests.
+To start using this workflow in your project, copy the `Compile C Project` workflow file into your repository under `.github/workflows/compile.yml`.
+This file will compile your C/C++ project and save the binary as an artifact for the Valgrind tests.
 
 ### Step 2: Add the Valgrind Workflow
 
