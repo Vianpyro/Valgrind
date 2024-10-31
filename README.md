@@ -155,17 +155,6 @@ In this example:
 
 ---
 
-## Customizing Valgrind Options
-
-The Valgrind Workflow **will** includes customizable options to control the level of detail in memory checks:
-
-- **`--leak-check=full`**: Provides detailed leak information.
-- **`--track-origins=yes`**: Tracks the origin of uninitialized values.
-- **`--show-reachable=yes`**: Shows reachable blocks that are not freed but can still be accessed.
-- **`--error-exitcode=1`**: Causes Valgrind to return an error if memory leaks are detected.
-
----
-
 ## Example Output
 
 Upon successful execution, Valgrind will output memory leak details directly in the GitHub Actions log. 
